@@ -1,0 +1,32 @@
+﻿@using BetterHealthCare_WebApp.Models.Patients
+@model IEnumerable<PatientDto>
+
+<h2>Patients</h2>
+<a class="btn btn-primary" href="@Url.Action("Create")">+ Add Patient</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Health Number</th>
+            <th>Date of Birth</th>
+            <th>Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.HealthNumber</td>
+                <td>@p.DateOfBirth.ToShortDateString()</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = p.Id })">Details</a> |
+                    <a href="@Url.Action("Edit", new { id = p.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = p.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
