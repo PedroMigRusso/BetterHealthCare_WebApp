@@ -1,0 +1,37 @@
+﻿@using BetterHealthCare_WebApp.Models.Patients
+@model PatientDto
+
+@{
+    ViewData["Title"] = "Create Patient";
+}
+
+<h2>Create Patient</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group mt-2">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="HealthNumber" class="form-label"></label>
+        <input asp-for="HealthNumber" class="form-control" />
+        <span asp-validation-for="HealthNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="DateOfBirth" class="form-label"></label>
+        <input asp-for="DateOfBirth" type="date" class="form-control" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Create</button>
+    <a class="btn btn-secondary mt-3" href="@Url.Action("Index")">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

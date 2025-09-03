@@ -17,12 +17,28 @@ namespace BetterHealthCare_WebApp.Services
             return response ?? new List<PatientDto>();
         }
 
-        public async Task CreateAsync(PatientDto patient)
+        public async Task<PatientDto> GetByIdAsync(int id)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/Patient", patient);
-            response.EnsureSuccessStatusCode();
+            var patient = await _httpClient.GetFromJsonAsync<PatientDto>($"api/patients/{id}");
+            return patient ?? new PatientDto();
         }
 
-        // Outros métodos: GetByIdAsync, UpdateAsync, DeleteAsync...
+        public async Task<bool> CreateAsync(PatientDto dto)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/patients", dto);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateAsync(int id, PatientDto dto)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"api/patients/{id}", dto);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"api/patients/{id}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }
