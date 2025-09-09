@@ -6,5 +6,6 @@ namespace BetterHealthCare_WebApp.Services.Interfaces
     {
         Task<IEnumerable<PatientActionDto>> GetByPatientIdAsync(int patientId);
         Task AddActionAsync(int patientId, CreatePatientActionDto action);
+        Task<bool> DeleteActionAsync(int patientId, int actionId);
     }
 }

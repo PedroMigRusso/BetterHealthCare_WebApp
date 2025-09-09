@@ -142,5 +142,12 @@ namespace BetterHealthCare_WebApp.Controllers
             return RedirectToAction("Details", new { id = vm.PatientId });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteAction(int patientId, int actionId)
+        {
+            await _patientActionService.DeleteActionAsync(patientId, actionId);
+            return RedirectToAction("Details", new { id = patientId });
+        }
+
     }
 }
