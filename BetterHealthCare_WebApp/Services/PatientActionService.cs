@@ -12,6 +12,12 @@ namespace BetterHealthCare_WebApp.Services
             _httpClient = httpClient;
         }
 
+        public async Task AddActionAsync(int patientId, CreatePatientActionDto action)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"api/patients/{patientId}/actions", action);
+            response.EnsureSuccessStatusCode();
+        }
+
         public async Task<IEnumerable<PatientActionDto>> GetByPatientIdAsync(int patientId)
         {
             return await _httpClient.GetFromJsonAsync<IEnumerable<PatientActionDto>>(

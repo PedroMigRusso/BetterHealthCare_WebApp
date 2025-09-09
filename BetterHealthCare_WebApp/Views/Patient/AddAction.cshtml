@@ -1,0 +1,26 @@
+﻿@using BetterHealthCare_WebApp.Models.Patients
+@model AddPatientActionViewModel
+
+<h2>Add Procedure to Patient</h2>
+
+<form asp-action="AddAction" method="post">
+    <input type="hidden" asp-for="PatientId" />
+
+    <div class="form-group">
+        <label asp-for="SelectedProcedureId"></label>
+        <select asp-for="SelectedProcedureId" class="form-control"
+                asp-items="@(new SelectList(Model.AvailableProcedures, "Id", "Name"))">
+            <option value="">-- Select Procedure --</option>
+        </select>
+        <span asp-validation-for="SelectedProcedureId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateOfProcedure"></label>
+        <input asp-for="DateOfProcedure" class="form-control" type="date" />
+        <span asp-validation-for="DateOfProcedure" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a asp-action="Details" asp-route-id="@Model.PatientId" class="btn btn-secondary">Cancel</a>
+</form>

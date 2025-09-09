@@ -47,4 +47,8 @@ else
 {
     <p>Este paciente não tem procedimentos associados.</p>
 }
+<a class="btn btn-success"
+   href="@Url.Action("AddAction", "Patient", new { patientId = Model.Id })">
+    + Add Procedure
+</a>
 

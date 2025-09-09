@@ -5,5 +5,6 @@ namespace BetterHealthCare_WebApp.Services.Interfaces
     public interface IPatientActionService
     {
         Task<IEnumerable<PatientActionDto>> GetByPatientIdAsync(int patientId);
+        Task AddActionAsync(int patientId, CreatePatientActionDto action);
     }
 }

@@ -9,10 +9,14 @@ namespace BetterHealthCare_WebApp.Controllers
     public class PatientController : Controller
     {
         private readonly IPatientService _service;
+        private readonly IProcedureService _procedureService;
+        private readonly IPatientActionService _patientActionService;
 
-        public PatientController(IPatientService service)
+        public PatientController(IPatientService service, IProcedureService procedureService, IPatientActionService patientActionService)
         {
             _service = service;
+            _procedureService = procedureService;
+            _patientActionService = patientActionService;
         }
 
         public async Task<IActionResult> Index()
@@ -77,6 +81,42 @@ namespace BetterHealthCare_WebApp.Controllers
 
             ModelState.AddModelError("", "Error deleting patient.");
             return RedirectToAction(nameof(Delete), new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddAction(int patientId)
+        {
+            var procedures = await _procedureService.GetAllAsync();
+
+            var vm = new AddPatientActionViewModel
+            {
+                PatientId = patientId,
+                AvailableProcedures = procedures,
+                DateOfProcedure = DateTime.Today
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAction(AddPatientActionViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                vm.AvailableProcedures = await _procedureService.GetAllAsync();
+                return View(vm);
+            }
+
+            var dto = new CreatePatientActionDto
+            {
+                ProcedureId = vm.SelectedProcedureId,
+                DateOfProcedure = vm.DateOfProcedure,
+                FilesId = new List<int>()
+            };
+
+            await _patientActionService.AddActionAsync(vm.PatientId, dto);
+
+            return RedirectToAction("Details", new { id = vm.PatientId });
         }
 
     }
