@@ -1,4 +1,5 @@
-﻿using BetterHealthCare_WebApp.Models.Patients;
+﻿using BetterHealthCare_WebApp.Models;
+using BetterHealthCare_WebApp.Models.Patients;
 using BetterHealthCare_WebApp.Services;
 using BetterHealthCare_WebApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,14 @@ namespace BetterHealthCare_WebApp.Controllers
         private readonly IPatientService _service;
         private readonly IProcedureService _procedureService;
         private readonly IPatientActionService _patientActionService;
+        private readonly IMedicalFileService _medicalFileService;
 
-        public PatientController(IPatientService service, IProcedureService procedureService, IPatientActionService patientActionService)
+        public PatientController(IPatientService service, IProcedureService procedureService, IPatientActionService patientActionService, IMedicalFileService medicalFileService)
         {
             _service = service;
             _procedureService = procedureService;
             _patientActionService = patientActionService;
+            _medicalFileService = medicalFileService;
         }
 
         public async Task<IActionResult> Index()
@@ -107,14 +110,34 @@ namespace BetterHealthCare_WebApp.Controllers
                 return View(vm);
             }
 
-            var dto = new CreatePatientActionDto
+            // 1️⃣ Enviar ficheiros para a API e obter IDs
+            var filesId = new List<int>();
+            if (vm.UploadedFiles.Any())
+            {
+                foreach (var file in vm.UploadedFiles)
+                {
+                    using var ms = new MemoryStream();
+                    await file.CopyToAsync(ms);
+
+                    var medicalFileDto = new MedicalFileDto
+                    {
+                        Base64 = Convert.ToBase64String(ms.ToArray())
+                    };
+
+                    var createdFile = await _medicalFileService.UploadFileAsync(medicalFileDto);
+                    filesId.Add(createdFile.Id);
+                }
+            }
+
+            // 2️⃣ Criar PatientAction
+            var actionDto = new CreatePatientActionDto
             {
                 ProcedureId = vm.SelectedProcedureId,
                 DateOfProcedure = vm.DateOfProcedure,
-                FilesId = new List<int>()
+                FilesId = filesId
             };
 
-            await _patientActionService.AddActionAsync(vm.PatientId, dto);
+            await _patientActionService.AddActionAsync(vm.PatientId, actionDto);
 
             return RedirectToAction("Details", new { id = vm.PatientId });
         }

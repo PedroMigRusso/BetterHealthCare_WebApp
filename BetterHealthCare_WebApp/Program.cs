@@ -19,6 +19,10 @@ builder.Services.AddHttpClient<IProcedureService, ProcedureService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:53093/");
 });
+builder.Services.AddHttpClient<IMedicalFileService, MedicalFileService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:53093/");
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

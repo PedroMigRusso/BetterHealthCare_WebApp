@@ -7,12 +7,13 @@ namespace BetterHealthCare_WebApp.Models.Patients
         public int PatientId { get; set; }
 
         [Required]
-        [Display(Name = "Procedure")]
         public int SelectedProcedureId { get; set; }
 
         [Required]
-        [Display(Name = "Date of Procedure")]
         public DateTime DateOfProcedure { get; set; }
+
+        // Novo: ficheiros
+        public List<IFormFile> UploadedFiles { get; set; } = new List<IFormFile>();
 
         public IEnumerable<ProcedureDto> AvailableProcedures { get; set; } = new List<ProcedureDto>();
     }
