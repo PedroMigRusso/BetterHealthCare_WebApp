@@ -2,7 +2,7 @@
 
 namespace BetterHealthCare_WebApp.Services
 {
-    public class PatientService
+    public class PatientService : IPatientService
     {
         private readonly HttpClient _httpClient;
 
@@ -39,6 +39,13 @@ namespace BetterHealthCare_WebApp.Services
         {
             var response = await _httpClient.DeleteAsync($"api/patients/{id}");
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<PatientDto?> GetWithActionsAsync(int id)
+        {
+            var response = await _httpClient.GetFromJsonAsync<PatientDto>($"api/patients/{id}/full");
+            return response;
+            // ou /withactions conforme ajustaste no API
         }
     }
 }

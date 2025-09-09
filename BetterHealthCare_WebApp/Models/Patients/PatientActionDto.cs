@@ -3,15 +3,8 @@
     public class PatientActionDto
     {
         public int Id { get; set; }
-
-        public int ProcedureId { get; set; }
-        //public Procedure Procedure { get; set; }
-
-        public List<int> FilesId { get; set; } = new List<int>();
-
+        public ProcedureDto Procedure { get; set; } = null!;
+        public List<int>? FilesId { get; set; }
         public DateTime DateOfProcedure { get; set; }
-
-        public int PatientId { get; set; }
-        //public Patient Patient { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BetterHealthCare_WebApp.Models.Patients;
 using BetterHealthCare_WebApp.Services;
+using BetterHealthCare_WebApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 
@@ -7,9 +8,9 @@ namespace BetterHealthCare_WebApp.Controllers
 {
     public class PatientController : Controller
     {
-        private readonly PatientService _service;
+        private readonly IPatientService _service;
 
-        public PatientController(PatientService service)
+        public PatientController(IPatientService service)
         {
             _service = service;
         }
@@ -22,8 +23,9 @@ namespace BetterHealthCare_WebApp.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var patient = await _service.GetByIdAsync(id);
+            var patient = await _service.GetWithActionsAsync(id);
             if (patient == null) return NotFound();
+
             return View(patient);
         }
 
@@ -76,5 +78,6 @@ namespace BetterHealthCare_WebApp.Controllers
             ModelState.AddModelError("", "Error deleting patient.");
             return RedirectToAction(nameof(Delete), new { id });
         }
+
     }
 }

@@ -1,12 +1,18 @@
 using BetterHealthCare_WebApp.Services;
+using BetterHealthCare_WebApp.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient<PatientService>(client =>
+builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:5001/"); // <-- API Address NEED TO CHANGE
+    client.BaseAddress = new Uri("http://localhost:53093/"); // porta correta da API
+});
+
+builder.Services.AddHttpClient<IPatientActionService, PatientActionService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:53093/");
 });
 var app = builder.Build();
 

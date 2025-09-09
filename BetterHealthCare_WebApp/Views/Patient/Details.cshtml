@@ -1,23 +1,50 @@
 ﻿@using BetterHealthCare_WebApp.Models.Patients
 @model PatientDto
 
-@{
-    ViewData["Title"] = "Patient Details";
+<a class="btn btn-secondary mb-3" href="@Url.Action("Index", "Patient")">← Back to Patients</a>
+
+
+<h2>Detalhes do Paciente</h2>
+<p><strong>Nome:</strong> @Model.Name</p>
+<p><strong>Número de Saúde:</strong> @Model.HealthNumber</p>
+<p><strong>Data de Nascimento:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+
+<h3>Procedimentos Associados</h3>
+@if (Model.Actions.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Nome do Procedimento</th>
+                <th>Tipo</th>
+                <th>Files</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var action in Model.Actions)
+            {
+                <tr>
+                    <td>@action.DateOfProcedure.ToShortDateString()</td>
+                    <td>@action.Procedure.Name</td>
+                    <td>@action.Procedure.Type</td>
+                    <td>
+                        @if (action.FilesId != null && action.FilesId.Any())
+                        {
+                            @string.Join(", ", action.FilesId)
+                        }
+                        else
+                        {
+                            <span>Nenhum</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Este paciente não tem procedimentos associados.</p>
 }
 
-<h2>Patient Details</h2>
-
-<div class="card mt-3">
-    <div class="card-body">
-        <h5 class="card-title">@Model.Name</h5>
-        <p class="card-text"><strong>Health Number:</strong> @Model.HealthNumber</p>
-        <p class="card-text"><strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
-        <p class="card-text"><strong>Date of Creation:</strong> @Model.DateOfCreation.ToShortDateString()</p>
-    </div>
-</div>
-
-<div class="mt-3">
-    <a class="btn btn-warning" href="@Url.Action("Edit", new { id = Model.Id })">Edit</a>
-    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.Id })">Delete</a>
-    <a class="btn btn-secondary" href="@Url.Action("Index")">Back to List</a>
-</div>
