@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ProcedureDto>
+
+<h2>Procedures</h2>
+<a class="btn btn-primary" href="@Url.Action("Create")">+ Add Procedure</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Type</td>
+                <td>
+                    <a href="@Url.Action("Delete", new { id = p.Id })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-secondary mt-3" href="@Url.Action("Index", "Patient")">← Back to Patients</a>
