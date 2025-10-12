@@ -29,5 +29,10 @@ namespace BetterHealthCare_WebApp.Services
             var response = await _httpClient.DeleteAsync($"api/patients/{patientId}/actions/{actionId}");
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<PatientActionDto?> GetByIdAsync(int patientId, int actionId) {
+            return await _httpClient.GetFromJsonAsync<PatientActionDto>(
+            $"api/patients/{patientId}/actions/{actionId}");
+        }
     }
 }

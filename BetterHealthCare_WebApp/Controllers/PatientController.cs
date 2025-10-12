@@ -121,6 +121,7 @@ namespace BetterHealthCare_WebApp.Controllers
 
                     var medicalFileDto = new MedicalFileDto
                     {
+                        FileName = file.FileName,
                         Base64 = Convert.ToBase64String(ms.ToArray())
                     };
 
@@ -147,6 +148,32 @@ namespace BetterHealthCare_WebApp.Controllers
         {
             await _patientActionService.DeleteActionAsync(patientId, actionId);
             return RedirectToAction("Details", new { id = patientId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ActionDetails(int patientId, int actionId)
+        {
+            var action = await _patientActionService.GetByIdAsync(patientId, actionId);
+            if (action == null) return NotFound();
+
+            var files = new List<MedicalFileDto>();
+            if (action.FilesId != null)
+            {
+                foreach (var fileId in action.FilesId)
+                {
+                    var file = await _medicalFileService.GetByIdAsync(fileId);
+                    if (file != null) files.Add(file);
+                }
+            }
+
+            var vm = new PatientActionDetailViewModel
+            {
+                PatientId = patientId, // <-- set patient ID here
+                Action = action,
+                Files = files
+            };
+
+            return View(vm);
         }
 
     }

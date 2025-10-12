@@ -34,6 +34,12 @@
                         }
                     </td>
                     <td>
+                        <a class="btn btn-primary btn-sm"
+                           href="@Url.Action("ActionDetails", "Patient", new { patientId = Model.Id, actionId = action.Id })">
+                            View Details
+                        </a>
+                    </td>
+                    <td>
                         <form asp-action="DeleteAction" method="post" class="d-inline">
                             <input type="hidden" name="patientId" value="@Model.Id" />
                             <input type="hidden" name="actionId" value="@action.Id" />
