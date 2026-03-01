@@ -7,21 +7,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:53093/"); // porta correta da API
+    client.BaseAddress = new Uri("http://localhost:5000/"); // porta correta da API
 });
 
 builder.Services.AddHttpClient<IPatientActionService, PatientActionService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:53093/");
+    client.BaseAddress = new Uri("http://localhost:5000/");
 });
 
 builder.Services.AddHttpClient<IProcedureService, ProcedureService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:53093/");
+    client.BaseAddress = new Uri("http://localhost:5000/");
 });
 builder.Services.AddHttpClient<IMedicalFileService, MedicalFileService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:53093/");
+    client.BaseAddress = new Uri("http://localhost:5000/");
 });
 var app = builder.Build();
 

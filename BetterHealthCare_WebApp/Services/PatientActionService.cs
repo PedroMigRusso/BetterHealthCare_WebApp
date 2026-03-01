@@ -21,7 +21,7 @@ namespace BetterHealthCare_WebApp.Services
         public async Task<IEnumerable<PatientActionDto>> GetByPatientIdAsync(int patientId)
         {
             return await _httpClient.GetFromJsonAsync<IEnumerable<PatientActionDto>>(
-                $"api/PatientAction/ByPatient/{patientId}");
+                $"api/patients/{patientId}/actions");
         }
 
         public async Task<bool> DeleteActionAsync(int patientId, int actionId)
