@@ -97,7 +97,9 @@ header {
 }
 
 main {
-  min-height: calc(100vh - 200px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ============================================================
@@ -105,15 +107,13 @@ main {
    ============================================================ */
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background: linear-gradient(135deg, #0E7C7B 0%, #1FA39F 100%);
   color: rgba(255, 255, 255, 0.9);
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   text-align: center;
   border-top: 2px solid rgba(14, 124, 123, 0.5);
-  margin-top: 3rem;
+  margin-top: auto;
+  width: 100%;
 }
 
 .footer a {

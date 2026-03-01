@@ -32,11 +32,18 @@ html, body {
   scroll-behavior: smooth;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 /* ============================================================
