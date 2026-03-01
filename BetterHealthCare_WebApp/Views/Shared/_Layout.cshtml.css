@@ -117,17 +117,20 @@ main {
 
 .footer {
   background: linear-gradient(135deg, #0E7C7B 0%, #1FA39F 100%);
-  color: rgba(255, 255, 255, 0.9);
+  color: white;
   padding: 2rem 0;
   text-align: center;
-  border-top: 2px solid rgba(14, 124, 123, 0.5);
+  border-top: 2px solid #0E7C7B;
   margin-top: auto;
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   flex-shrink: 0;
+  z-index: 100;
+  position: relative;
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.95);
+  color: white;
   text-decoration: underline;
 }
 
