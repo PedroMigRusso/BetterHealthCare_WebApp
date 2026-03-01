@@ -1,3 +1,7 @@
+/* ============================================================
+   SITE SPECIFIC STYLES (Theme overrides go here)
+   ============================================================ */
+
 html {
   font-size: 14px;
 }
@@ -8,15 +12,30 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Remove transition from hover animations */
+.btn, .card, .nav-link {
+  transition: all 0.3s ease;
 }
 
-body {
-  margin-bottom: 60px;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0E7C7B;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1FA39F;
 }

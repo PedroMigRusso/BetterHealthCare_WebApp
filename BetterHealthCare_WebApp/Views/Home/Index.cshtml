@@ -1,8 +1,164 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Section -->
+<div class="hero-section mb-5" style="background: linear-gradient(135deg, #0E7C7B 0%, #1FA39F 100%); 
+                                        color: white; 
+                                        padding: 4rem 2rem; 
+                                        border-radius: 10px; 
+                                        text-align: center;
+                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);">
+    <h1 class="display-4 fw-bold mb-3">Welcome to BetterHealthCare</h1>
+    <p class="lead mb-4">Comprehensive Patient Management System for Modern Healthcare</p>
+    <p class="text-white-50">Manage patients, procedures, and medical records with ease</p>
 </div>
+
+<!-- Feature Cards -->
+<div class="row g-4 mb-5">
+    <!-- Patients Card -->
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header text-center py-4">
+                <h3 style="font-size: 3rem; margin: 0;">👥</h3>
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">Patient Management</h5>
+                <p class="card-text text-muted">
+                    Create, view, update, and manage patient records. Keep track of patient information and medical history all in one place.
+                </p>
+                <a href="/Patient/Index" class="btn btn-primary mt-3">
+                    <span>Manage Patients</span> →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Procedures Card -->
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header text-center py-4">
+                <h3 style="font-size: 3rem; margin: 0;">⚕️</h3>
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">Procedures & Treatments</h5>
+                <p class="card-text text-muted">
+                    Manage medical procedures and treatments. Register and track all procedures performed for better clinical documentation.
+                </p>
+                <a href="/Procedure/Index" class="btn btn-primary mt-3">
+                    <span>View Procedures</span> →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical Files Card -->
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header text-center py-4">
+                <h3 style="font-size: 3rem; margin: 0;">📋</h3>
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">Medical Records</h5>
+                <p class="card-text text-muted">
+                    Securely store and manage digital medical files including reports, prescriptions, and diagnostic results.
+                </p>
+                <button class="btn btn-primary mt-3" disabled>
+                    <span>Coming Soon</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats Section -->
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <h6 class="text-muted text-uppercase">Total Patients</h6>
+                <h2 class="text-primary fw-bold" style="margin-top: 0.5rem;">--</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <h6 class="text-muted text-uppercase">Procedures</h6>
+                <h2 class="text-success fw-bold" style="margin-top: 0.5rem;">--</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <h6 class="text-muted text-uppercase">Medical Files</h6>
+                <h2 class="text-info fw-bold" style="margin-top: 0.5rem;">--</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="card border-0 shadow-sm mt-5">
+    <div class="card-header">
+        <h5 class="card-title mb-0">✨ Key Features</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <strong class="text-primary">✓</strong> Complete Patient Profiles
+                    </li>
+                    <li class="mb-3">
+                        <strong class="text-primary">✓</strong> Medical History Tracking
+                    </li>
+                    <li class="mb-3">
+                        <strong class="text-primary">✓</strong> Procedure Management
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <strong class="text-primary">✓</strong> Digital Medical Records
+                    </li>
+                    <li class="mb-3">
+                        <strong class="text-primary">✓</strong> Efficient Data Organization
+                    </li>
+                    <li class="mb-3">
+                        <strong class="text-primary">✓</strong> User-Friendly Interface
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero-section {
+        animation: slideDown 0.6s ease-out;
+    }
+    
+    .card {
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-8px);
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
